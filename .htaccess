@@ -1,0 +1,37 @@
+Options +FollowSymLinks
+RewriteEngine On
+RewriteBase /
+
+#RewriteCond %{HTTP_HOST} !^www\. [NC]
+#RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+RewriteRule ^(handlers|ww-admin)($|/) - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+#RewriteRule ^([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/$ index.php?v1=$1&v2=$2&v3=$3&v4=$4&v5=$5 [NC,L]
+#RewriteRule ^([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)$ index.php?v1=$1&v2=$2&v3=$3&v4=$4&v5=$5 [NC,L]
+
+RewriteRule ^([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)$ index.php?v1=$1&v2=$2&v3=$3 [NC,L]
+RewriteRule ^([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/$ index.php?v1=$1&v2=$2&v3=$3 [NC,L]
+
+RewriteRule ^([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)$ index.php?v1=$1&v2=$2 [NC,L]
+RewriteRule ^([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/$ index.php?v1=$1&v2=$2 [NC,L]
+
+RewriteRule ^([a-zA-Z0-9-]+)$ index.php?v1=$1 [NC,L]
+RewriteRule ^([a-zA-Z0-9-]+)/$ index.php?v1=$1 [NC,L]
+ErrorDocument 404 /404.php
+
+# BEGIN EXPIRES
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 10 days"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType text/plain "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType application/x-javascript "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType application/x-icon "access plus 1 year"
+</IfModule>
+# END EXPIRES
